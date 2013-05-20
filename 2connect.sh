@@ -3,10 +3,12 @@ echo "start-num:" ; read START
 echo "stop-num:" ;  read STOP
 HOSTNAME="amz"
 
-if [ $1 == "Mine" ] ; then
+if [ $1 == "Mine1" ] ; then
 	echo "startng-worker-number:" ; read SWN
-	echo "which mine string:" ; read N
-	MINESTR=$( cat connect-mine-string.txt | head - $n | tail -1)
+fi
+
+if [ $1 == "Mine2" ] ; then
+	echo "startng-worker-number:" ; read SWN
 fi
 
 if [ $1 == "Kill" ]
@@ -31,7 +33,7 @@ Mine1 () {
 }
 Mine2 () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
-"echo -e './cudaminer -C 1,1 --url=us.litecoinpool.org:9332 --userpass=wetroof.${SWD}:4444 &\nsleep 5 ;  sudo pkill sshd' > startcuda.sh ; sh startcuda.sh"
+"echo -e './cudaminer --url=litecoinpool.org:9332 --userpass=wetroof.${SWD}:4444 &\nsleep 5 ;  sudo pkill sshd' > startcuda.sh ; sh startcuda.sh"
 	SWN=$[$SWN+1] ; echo $SWN
 }
         

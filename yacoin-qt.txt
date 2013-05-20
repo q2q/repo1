@@ -1,0 +1,8 @@
+sudo apt-get install git libminiupnpc-dev build-essential libssl-dev libdb4.8-dev libdb4.8++-dev libboost-all-dev
+git clone https://github.com/pocopoco/yacoin
+cd yacoin/src
+make -f makefile.unix
+cd ..
+sudo apt-get install qt4-qmake libqt4-dev
+qmake
+make

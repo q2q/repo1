@@ -1,0 +1,2 @@
+ec2.us-east-1.amazonaws.com
+$ export EC2_URL=https://<service_endpoint>  

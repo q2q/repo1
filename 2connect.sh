@@ -2,7 +2,7 @@
 echo "start-num:" ; read START
 echo "stop-num:" ;  read STOP
 HOSTNAME="amzb"
-STIME=100
+STIME=1
 
 if [ $1 == "Mine1" ] ; then
 	echo "startng-worker-number:" ; read SWN
@@ -35,7 +35,7 @@ Mine1 () {
 }
 Mine2 () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
-"echo -e './cudaminer --url=litecoinpool.org:9332 --userpass=wetroof.${SWN}:4444 &\nsleep $STIME ;  sudo pkill sshd' > startcuda.sh ; sh startcuda.sh"
+"echo -e './cudaminer -l 56x4,56x4 --url=litecoinpool.org:9332 --userpass=wetroof.${SWN}:4444 &\npkill sshd' > startcuda.sh ; screen -d -m sh startcuda.sh"
 	SWN=$[$SWN+1] ; echo $SWN
 }
         

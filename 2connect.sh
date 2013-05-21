@@ -40,15 +40,7 @@ Mine1 () {
 #"screen -d -m ./gbt2 -a scrypt-jane --url=mineyac2.dontmine.me:8080 --userpass=rogiservice.$SWN:pass"
 }
 Mine2 () {
-	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
-echo "./cudaminer -l 56x8,56x8 -C 1,1 --url=http://${B}:8332 --userpass=growl.${SWN}:x" > a.txt
-	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
-"cat export.txt a.txt > startcuda.sh" 
-	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i "screen -dm sh startcuda.sh"
-	
-"screen -dm export PATH=/usr/local/cuda-5.0/bin:$PATH ;
-export LD_LIBRARY_PATH=/usr/local/cuda-5.0/lib64:/usr/local/cuda-5.0/lib ;
-./cudaminer -l 56x8,56x8 -C 1,1 --url=http://${MINE2ADDR}:8332 --userpass=growl.${SWN}:x 
+	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i "screen -dm sh startcuda.sh $B $SWN"
 	SWN=$[$SWN+1] ; echo $SWN
 }
         

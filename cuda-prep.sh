@@ -11,14 +11,11 @@ echo "PATH=/usr/local/cuda-5.0/bin:$PATH" >> .bashrc
 echo "export LD_LIBRARY_PATH=/usr/local/cuda-5.0/lib64:/usr/local/cuda-5.0/lib" >> .bashrc
 
 cd repo1
-sh driver.sh
-cd repo1
-cd cudaf*/cudaminer-src*
-
+sudo sh driver.sh
+cd cudaminer-2*/cudaminer-src*
 chmod +x configure autotools.sh configure.sh
 ./configure 
 make
-
 cp cudaminer ~/cudaminer 
 
 

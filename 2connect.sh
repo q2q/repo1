@@ -16,15 +16,20 @@ if [ $1 == "Kill" ] ; then
 	echo "process-name:" ; read PNAME
 fi
 
-Transfer() {
+Transfer1() {
         scp -o StrictHostkeyChecking=no ~/IDCF/s2.sh $HOSTNAME$i:/root/
         ssh -o StrictHostkeyChecking=no $HOSTNAME$i "screen -d -m sh s2.sh"
         }
         
-Tamazon() {
+Transfer2() {
 	GITURL="https://github.com/q2q/repo1.git"
 	REPO="repo1"
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}${i} "sudo apt-get update ; sudo apt-get -y install git ; git clone $GITURL ; sh $REPO/initscript.sh"
+	}	
+
+Transfer3() {
+	REPO="repo1"
+	ssh -o StrictHostkeyChecking=no ${HOSTNAME}${i} "sh $REPO/cuda-prep.sh"
 	}	
 
 Mine1 () {

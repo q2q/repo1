@@ -5,6 +5,8 @@ HOSTNAME="amzb"
 STIME=10
 A="10.235.59.172"  # amazon-windows-local
 B="54.216.111.57"  # amazon-windows [stratum proxy atm]
+
+#YAC-MINING-VARS
 C="168.61.9.67"    # azure-west-windows
 PROG="./gbt2"
 THREADS=8

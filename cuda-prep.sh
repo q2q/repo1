@@ -1,5 +1,6 @@
 #!/bin/bash
 sudo apt-get -y install freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev gcc make libcurl4-openssl-dev autoconf git screen libncurses5-dev libdb4.8-dev 
+cd ~/
 wget http://developer.download.nvidia.com/compute/cuda/5_0/rel-update-1/installers/cuda_5.0.35_linux_64_ubuntu11.10-1.run
 
 sudo bash cuda_5.0.35_linux_64_ubuntu11.10-1.run -silent -driver -toolkit

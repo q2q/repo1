@@ -34,13 +34,12 @@ Transfer3() {
 
 Mine1 () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
-"cd cpuminer; screen -d -m ./minerd -a scrypt-jane --url=168.61.9.67:9323 --userpass=user:pass -t 14"
+"cd cpuminer; screen -d -m ./minerd -a scrypt-jane --url=10.235.59.172:9323 --userpass=user:pass -t 14"
 #"screen -d -m ./gbt2 -a scrypt-jane --url=mineyac2.dontmine.me:8080 --userpass=rogiservice.$SWN:pass"
-	SWN=$[$SWN+1] ; echo $SWN
 }
 Mine2 () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
-"echo -e './cudaminer -l 56x4,56x4 --url=litecoinpool.org:9332 --userpass=wetroof.${SWN}:4444 &\npkill sshd' > startcuda.sh ; screen -d -m sh startcuda.sh"
+"echo -e './cudaminer -l 56x8,56x8 -C 1,1 --url=http://10.235.59.172:8332 --userpass=growl.${SWN}:x &\n sleep $STIME ; pkill sshd' > startcuda.sh ; screen -d -m sh startcuda.sh"
 	SWN=$[$SWN+1] ; echo $SWN
 }
         

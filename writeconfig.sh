@@ -10,8 +10,8 @@ if [ -z $OF1 ] ; then
 	OF1="${HOME}/tempconfig"
 fi
 
-KEY="~/.ssh/firstkey.pem"
-USER="ubutu"
+KEY="~/.ssh/amzk2.pem"
+USER="ubuntu"
 
 
 declare -i START=1

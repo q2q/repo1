@@ -8,13 +8,13 @@ B="54.216.111.57"  # amazon-windows [stratum proxy atm]
 
 #YAC-MINING-VARS
 C="168.61.9.67"    # azure-west-windows
-PROG="./gbt2"
-THREADS=8
+PROG="./minerd"
+THREADS=14
 DIR=$HOME
 
 REPO="repo1"
 GITURL="https://github.com/q2q/repo1.git"
-
+PA='a' ; PB='a'
 
 if [ $1 == "Mine1" ] ; then
 	echo "startng-worker-number:" ; read SWN
@@ -35,7 +35,7 @@ Transfer1() {
         }
         
 Transfer2() {
-	ssh -o StrictHostkeyChecking=no ${HOSTNAME}${i} \ 
+	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
 "sudo apt-get update ; sudo apt-get -y install git ; git clone $GITURL ; sh $REPO/initscript.sh"
 	}	
 
@@ -45,7 +45,7 @@ Transfer3() {
 
 Load () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i "sudo sh driver.sh"
-
+}
 Mine1 () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
 "screen -d -m $PROG -a scrypt-jane --url=$C:9323 --userpass=user:pass -t $THREADS"
@@ -57,7 +57,7 @@ Mine2 () {
 
 Cleanup () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \ "cp repo1/driver.sh repo1/startcuda.sh ~/"
-        
+}        
 Kill () {
 	 ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
 "pkill $PNAME"
@@ -68,10 +68,15 @@ Reboot () {
 }
 
 Status () {
-	if [ $PA == a ] ; then ; echo "first-prog-name:" ; read PA ; fi 
-	if [ $PB == a ] ; then ; echo "second-prog-name:" ; read PA ; fi
-	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i "ps -e | grep -e '$PA||$PB"
-	
+	if [ $PA == a ] ; then
+	echo "first-prog-name:" ; read PA
+fi 
+
+	if [ $PB == a ] ; then 
+	 echo "second-prog-name:" ; read PB 
+fi
+ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i "ps -e | grep $PA ; ps -e | grep $PB"
+}	
 
 Secure() {
 	ssh -o StrictHostkeyChecking=no $HOSTNAME$i " echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config "

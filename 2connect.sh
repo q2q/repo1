@@ -3,8 +3,13 @@ echo "start-num:" ; read START
 echo "stop-num:" ;  read STOP
 HOSTNAME="amzb"
 STIME=10
-A="10.235.59.172"
-B="54.216.111.57"
+A="10.235.59.172"  # amazon-windows-local
+B="54.216.111.57"  # amazon-windows [stratum proxy atm]
+C="168.61.9.67"    # azure-west-windows
+PROG="./gbt2"
+THREADS=8
+DIR=$HOME
+
 
 if [ $1 == "Mine1" ] ; then
 	echo "startng-worker-number:" ; read SWN
@@ -34,10 +39,11 @@ Transfer3() {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}${i} "sh $REPO/cuda-prep.sh"
 	}	
 
+ 
+
 Mine1 () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
-"cd cpuminer; screen -d -m ./minerd -a scrypt-jane --url=$A:9323 --userpass=user:pass -t 14"
-#"screen -d -m ./gbt2 -a scrypt-jane --url=mineyac2.dontmine.me:8080 --userpass=rogiservice.$SWN:pass"
+"cd $DIR; screen -d -m $PROG -a scrypt-jane --url=$C:9323 --userpass=user:pass -t $THREADS"
 }
 Mine2 () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i "screen -dm sh startcuda.sh $B $SWN"

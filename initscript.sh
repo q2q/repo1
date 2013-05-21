@@ -6,3 +6,4 @@ cd $HOME/cpuminer
 ./autogen.sh
 ./configure CFLAGS=-O3
 make
+cd cpuminer ~/cpuminer 

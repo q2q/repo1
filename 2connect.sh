@@ -35,7 +35,8 @@ Transfer1() {
         }
         
 Transfer2() {
-	ssh -o StrictHostkeyChecking=no ${HOSTNAME}${i} "sudo apt-get update ; sudo apt-get -y install git ; git clone $GITURL ; sh $REPO/initscript.sh"
+	ssh -o StrictHostkeyChecking=no ${HOSTNAME}${i} \ 
+"sudo apt-get update ; sudo apt-get -y install git ; git clone $GITURL ; sh $REPO/initscript.sh"
 	}	
 
 Transfer3() {
@@ -43,16 +44,19 @@ Transfer3() {
 	}	
 
 Load () {
-	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i "sudo sh $REPO/driver.sh"
+	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i "sudo sh driver.sh"
 
 Mine1 () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
 "screen -d -m $PROG -a scrypt-jane --url=$C:9323 --userpass=user:pass -t $THREADS"
 }
 Mine2 () {
-	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i "screen -dm sh $REPO/startcuda.sh $B $SWN"
+	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i "screen -dm sh startcuda.sh $B $SWN"
 	SWN=$[$SWN+1] ; echo $SWN
 }
+
+Cleanup () {
+	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \ "cp repo1/driver.sh repo1/startcuda.sh ~/"
         
 Kill () {
 	 ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \

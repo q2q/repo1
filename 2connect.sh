@@ -41,7 +41,9 @@ Mine1 () {
 }
 Mine2 () {
 	ssh -o StrictHostkeyChecking=no ${HOSTNAME}$i \
-"echo -e './cudaminer -l 56x8,56x8 -C 1,1 --url=http://${MINE2ADDR}:8332 --userpass=growl.${SWN}:x &\n sleep $STIME ; pkill sshd' > startcuda.sh ; screen -d -m sh startcuda.sh"
+"screen -dm export PATH=/usr/local/cuda-5.0/bin:$PATH ;
+export LD_LIBRARY_PATH=/usr/local/cuda-5.0/lib64:/usr/local/cuda-5.0/lib ;
+./cudaminer -l 56x8,56x8 -C 1,1 --url=http://${MINE2ADDR}:8332 --userpass=growl.${SWN}:x 
 	SWN=$[$SWN+1] ; echo $SWN
 }
         
